@@ -67,19 +67,18 @@ Creating table with dates and its total steps
 ```r
 total_steps<- data %>% group_by(date) %>% 
     summarise(steps = sum(steps)) %>% data.frame()
-kable(head(total_steps))
+head(total_steps)
 ```
 
-
-
-date          steps
------------  ------
-2012-10-02      126
-2012-10-03    11352
-2012-10-04    12116
-2012-10-05    13294
-2012-10-06    15420
-2012-10-07    11015
+```
+##         date steps
+## 1 2012-10-02   126
+## 2 2012-10-03 11352
+## 3 2012-10-04 12116
+## 4 2012-10-05 13294
+## 5 2012-10-06 15420
+## 6 2012-10-07 11015
+```
 
 Calculating the mean and median of total number of steps taken per day
 
@@ -187,17 +186,18 @@ The new data looks like:
 
 
 ```r
-kable(head(new_data))
+head(new_data)
 ```
 
-       interval       steps  date       
-----  ---------  ----------  -----------
-1             0   1.7169811  2012-10-01 
-63            5   0.3396226  2012-10-01 
-128          10   0.1320755  2012-10-01 
-205          15   0.1509434  2012-10-01 
-264          20   0.0754717  2012-10-01 
-327          25   2.0943396  2012-10-01 
+```
+##     interval     steps       date
+## 1          0 1.7169811 2012-10-01
+## 63         5 0.3396226 2012-10-01
+## 128       10 0.1320755 2012-10-01
+## 205       15 0.1509434 2012-10-01
+## 264       20 0.0754717 2012-10-01
+## 327       25 2.0943396 2012-10-01
+```
 
 Look that the first intervals does not have NA's in the steps variable, they have an average instead.
 
@@ -288,19 +288,19 @@ It looks like:
 
 
 ```r
-kable(head(part_week))
+head(part_week)
 ```
 
+```
+##       day interval steps       date    week
+## 1 domingo     2040    35 2012-10-21 weekend
+## 2 domingo     2000    12 2012-10-21 weekend
+## 3 domingo     2035    20 2012-10-21 weekend
+## 4 domingo     2240     0 2012-10-21 weekend
+## 5 domingo     2245     0 2012-10-21 weekend
+## 6 domingo     2005   219 2012-10-21 weekend
+```
 
-
-day        interval   steps  date         week    
---------  ---------  ------  -----------  --------
-domingo        2040      35  2012-10-21   weekend 
-domingo        2000      12  2012-10-21   weekend 
-domingo        2035      20  2012-10-21   weekend 
-domingo        2240       0  2012-10-21   weekend 
-domingo        2245       0  2012-10-21   weekend 
-domingo        2005     219  2012-10-21   weekend 
 
 Creating data frames with Average of 5-minut interval per day, for weekday and weekends.
 
@@ -327,4 +327,4 @@ plot(fin_semana[,2:3], type = "l", lwd = 1.5, col = "blue",
 
 ![](PA1_template_files/figure-html/unnamed-chunk-6-1.png)<!-- -->
 
-There are big differences in both time series, in general there are more activity on weekends than weekdays, and it makes sense.
+There are big differences in both time series, in general there are more activity on weekends than weekdays and it makes sense.

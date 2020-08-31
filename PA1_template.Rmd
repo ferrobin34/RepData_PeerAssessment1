@@ -50,7 +50,7 @@ Creating table with dates and its total steps
 ```{r total_steps}
 total_steps<- data %>% group_by(date) %>% 
     summarise(steps = sum(steps)) %>% data.frame()
-kable(head(total_steps))
+head(total_steps)
 ```
 
 Calculating the mean and median of total number of steps taken per day
@@ -130,7 +130,7 @@ new_data <- new_data[1:3]
 The new data looks like:
 
 ```{r newdata}
-kable(head(new_data))
+head(new_data)
 ```
 
 Look that the first intervals does not have NA's in the steps variable, they have an average instead.
@@ -216,8 +216,9 @@ part_week <- part_week %>% merge(data_week, by = "day")
 It looks like:
 
 ```{r}
-kable(head(part_week))
+head(part_week)
 ```
+
 
 Creating data frames with Average of 5-minut interval per day, for weekday and weekends.
 
@@ -242,4 +243,4 @@ plot(fin_semana[,2:3], type = "l", lwd = 1.5, col = "blue",
 
 ```
 
-There are big differences in both time series, in general there are more activity on weekends than weekdays, and it makes sense.
+There are big differences in both time series, in general there are more activity on weekends than weekdays and it makes sense.
