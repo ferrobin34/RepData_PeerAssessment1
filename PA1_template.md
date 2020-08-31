@@ -252,6 +252,7 @@ legend("topright",col = c("black","red"),
 ```
 
 ![](PA1_template_files/figure-html/comparison-1.png)<!-- -->
+
 There is not a significant change in the new histogram and the mean and median are very similarly.
 
 |DATA       |Mean              |Median              |
@@ -287,15 +288,43 @@ It looks like:
 
 
 ```r
-head(part_week)
+kable(head(part_week))
 ```
 
+
+
+day        interval   steps  date         week    
+--------  ---------  ------  -----------  --------
+domingo        2040      35  2012-10-21   weekend 
+domingo        2000      12  2012-10-21   weekend 
+domingo        2035      20  2012-10-21   weekend 
+domingo        2240       0  2012-10-21   weekend 
+domingo        2245       0  2012-10-21   weekend 
+domingo        2005     219  2012-10-21   weekend 
+
+Creating data frames with Average of 5-minut interval per day, for weekday and weekends.
+
+
+```r
+prueba <- part_week %>% group_by(week,interval) %>% 
+  summarise(steps = mean(steps)) %>% data.frame() 
+
+entre_semana <- subset(prueba, week == "weekday")
+fin_semana <- subset(prueba, week == "weekend" )
 ```
-##       day interval steps       date    week
-## 1 domingo     2040    35 2012-10-21 weekend
-## 2 domingo     2000    12 2012-10-21 weekend
-## 3 domingo     2035    20 2012-10-21 weekend
-## 4 domingo     2240     0 2012-10-21 weekend
-## 5 domingo     2245     0 2012-10-21 weekend
-## 6 domingo     2005   219 2012-10-21 weekend
+
+Ploting time series of weekdays and weekeend.
+
+
+```r
+par(mfrow = c(2,1), mar = c(4,4,2,2))
+
+plot(entre_semana[,2:3], type = "l", lwd = 1.5, col = "blue",
+     main = "Weekdays",xlab = "", ylab = "Average Steps")
+plot(fin_semana[,2:3], type = "l", lwd = 1.5, col = "blue",
+     main = "Weekend", xlab = "Interval", ylab = "Average Steps")
 ```
+
+![](PA1_template_files/figure-html/unnamed-chunk-6-1.png)<!-- -->
+
+There are big differences in both time series, in general there are more activity on weekends than weekdays, and it makes sense.

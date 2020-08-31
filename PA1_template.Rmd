@@ -181,6 +181,7 @@ legend("topright",col = c("black","red"),
        legend = c("Mean","Median"), lty = c(1,2), lwd = 3 )
 
 ```
+
 There is not a significant change in the new histogram and the mean and median are very similarly.
 
 |DATA       |Mean              |Median              |
@@ -215,5 +216,30 @@ part_week <- part_week %>% merge(data_week, by = "day")
 It looks like:
 
 ```{r}
-head(part_week)
+kable(head(part_week))
 ```
+
+Creating data frames with Average of 5-minut interval per day, for weekday and weekends.
+
+```{r}
+prueba <- part_week %>% group_by(week,interval) %>% 
+  summarise(steps = mean(steps)) %>% data.frame() 
+
+entre_semana <- subset(prueba, week == "weekday")
+fin_semana <- subset(prueba, week == "weekend" )
+
+```
+
+Ploting time series of weekdays and weekeend.
+
+```{r}
+par(mfrow = c(2,1), mar = c(4,4,2,2))
+
+plot(entre_semana[,2:3], type = "l", lwd = 1.5, col = "blue",
+     main = "Weekdays",xlab = "", ylab = "Average Steps")
+plot(fin_semana[,2:3], type = "l", lwd = 1.5, col = "blue",
+     main = "Weekend", xlab = "Interval", ylab = "Average Steps")
+
+```
+
+There are big differences in both time series, in general there are more activity on weekends than weekdays, and it makes sense.
